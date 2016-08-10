@@ -55,6 +55,14 @@ public:
 		}
 		return *this;
 	}
+	matrix<T, N, M>& apply(std::function<T()> func) {
+		for (size_t n = 0; n < N; ++n) {
+			for (size_t m = 0; m < M; ++m) {
+				(*this)[n][m] = func();
+			}
+		}
+		return *this;
+	}
 
 	template <typename V>
 	matrix<V, N, M> convert(std::function<V(T)> func) {
